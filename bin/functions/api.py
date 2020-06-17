@@ -17,7 +17,7 @@ def json_response(status, data = None):
         message = 'Unauthorized.'
     elif status == 405:
         message = 'Method not allowed.'
-    elif status == 409:
+    elif status == 422:
         message = 'Invalid request parameters.'
     elif status == 498:
         message = 'Invalid token.'
