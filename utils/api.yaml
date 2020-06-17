@@ -24,19 +24,17 @@ paths:
                 $ref: '#/components/schemas/Error'
 
   /auth/login:
-    get:
+    post:
       summary: 'Returns a JWT with the user credentials.'
       operationId: generateToken
       tags:
         - User
-      parameters:
-        - name: id
-          in: query
-          description: ID of the user
-          required: true
-          schema:
-            type: integer
-            format: int32
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
       responses:
         '200':
           description: 'Returns an user object with the token'
