@@ -1,16 +1,34 @@
 openapi: 3.0.0
+
 info:
   version: 1.0.0
   title: Flask API
+
 servers:
   - url: 'http://localhost:5000'
+
 paths:
+  /:
+    get:
+      summary: 'Alive endpoint: Default route'
+      tags:
+        - Misc
+      responses:
+        '200':
+          description: 'API is alive.'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
   /user:
     get:
       summary: 'Sample endpoint: Returns details about a particular user'
       operationId: listUser
       tags:
-        - user
+        - User
       parameters:
         - name: id
           in: query
