@@ -1,5 +1,6 @@
 from flask import jsonify
 from bin import app
+from bin.functions.api import json_response
 
 app = app.init()
 
@@ -11,7 +12,7 @@ def alive():
 
 @app.route('/auth/login', methods={ 'POST' })
 def login():
-    return jsonify({ 'message': 'Route not implemented yet.' }), 404
+    return json_response(501)
 
 
 if __name__ == '__main__':
