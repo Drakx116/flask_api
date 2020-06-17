@@ -72,3 +72,77 @@ components:
       properties:
         error:
           type: string
+openapi: 3.0.0
+
+info:
+  version: 1.0.0
+  title: Flask API
+
+servers:
+  - url: '127.0.0.1:5000'
+
+paths:
+  /:
+    get:
+      summary: 'Alive default route'
+      tags:
+        - Misc
+      responses:
+        '200':
+          description: 'API is alive.'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /auth/login:
+    post:
+      summary: 'Returns a JWT with the user credentials.'
+      operationId: generateToken
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: 'Returns an user object with the token'
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
