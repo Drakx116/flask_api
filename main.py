@@ -1,10 +1,11 @@
 from flask import jsonify, request
 from flask_jwt_extended import JWTManager, jwt_required
-from bin import app
+from bin import app, db
 from bin.functions.api import json_response
 from bin.functions.jwt import generate_token
 
 app = app.init()
+db = db.init()
 jwt = JWTManager(app)
 
 
